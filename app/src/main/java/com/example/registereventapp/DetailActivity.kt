@@ -1,20 +1,32 @@
 package com.example.registereventapp
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_detail)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val tvKetQua = findViewById<TextView>(R.id.tvKetQua)
+        val btnQuayLai = findViewById<Button>(R.id.btnQuayLai)
+
+        val hoTen = intent.getStringExtra("HO_TEN") ?: ""
+        val email = intent.getStringExtra("EMAIL") ?: ""
+        val gioiTinh = intent.getStringExtra("GIOI_TINH") ?: ""
+        val mangXaHoi = intent.getStringExtra("MANG_XA_HOI") ?: ""
+
+        tvKetQua.text = """
+            Họ và tên: $hoTen
+            Email: $email
+            Giới tính: $gioiTinh
+            Mạng xã hội: $mangXaHoi
+        """.trimIndent()
+
+        btnQuayLai.setOnClickListener {
+            finish()
         }
     }
 }
